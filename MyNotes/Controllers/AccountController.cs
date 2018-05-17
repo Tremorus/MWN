@@ -37,7 +37,7 @@ namespace MyNotes.Controllers
         {
             if (ModelState.IsValid)
             {
-                User user = new User { Email = model.Email, UserName = model.Email };
+                User user = new User { Email = model.Email, UserName = model.UserName };
 
                 /*С помощью метода _userManager.CreateAsync пользователь добавляется в базу данных. 
                  *В качестве параметра передается сам пользователь и его пароль.*/
