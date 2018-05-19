@@ -10,6 +10,13 @@ namespace MWN.Controllers
     {
         public IActionResult Index()
         {
+
+            return View();
+        }
+
+        public IActionResult Woohoo(int i)
+        {
+            ViewData["i"] = i;
             return View();
         }
 
