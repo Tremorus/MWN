@@ -17,9 +17,15 @@ namespace MWN.Controllers
         }
 
         // GET: Notes
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-            return View(await _context.Note.ToListAsync());
+            var notes = from m in _context.Note select m; //LINQ query
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                notes = notes.Where(s => s.Content.Contains(searchString));
+            }
+            return View(await notes.ToListAsync());
         }
 
         // GET: Notes/Details/5

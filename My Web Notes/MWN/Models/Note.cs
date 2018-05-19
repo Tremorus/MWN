@@ -10,13 +10,15 @@ namespace MWN.Models
     {
 
         public string Id { get; set; }
+        [Display(Name="Author")]
         public string Owner { get; set; }
         public string Title { get; set; }
         [DataType(DataType.MultilineText)]
         public string Content { get; set; }
-        [DataType(DataType.DateTime)]
+        [Display(Name = "Creation date")]
+        [DataType(DataType.Date)]
         public DateTime Created { get; set; }
-        [DataType(DataType.DateTime)]
+        [DataType(DataType.Date)]
         public DateTime Changed { get; set; }
         public Note()
         {
