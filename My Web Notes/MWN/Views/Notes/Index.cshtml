@@ -10,7 +10,7 @@
     <a asp-action="Create" class="btn btn-success">Create New</a>
 </p>
 
-<form asp-controller="Notes" asp-action="Index">
+<form asp-controller="Notes" asp-action="Index" method="get">
     <p>
         Search in content: <input type="search" name="searchString" />
         <input type="submit" value="Filter" />
