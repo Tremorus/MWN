@@ -1,28 +1,27 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MWN.Models;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace MWN.Controllers
 {
-    public class NotesController : Controller
+    public class Notes2Controller : Controller
     {
         private readonly MWNContext _context;
 
-        public NotesController(MWNContext context)
+        public Notes2Controller(MWNContext context)
         {
             _context = context;
         }
 
-        // GET: Notes
+        // GET: Notes2
         public async Task<IActionResult> Index()
         {
             return View(await _context.Note.ToListAsync());
         }
 
-        // GET: Notes/Details/5
+        // GET: Notes2/Details/5
         public async Task<IActionResult> Details(string id)
         {
             if (id == null)
@@ -40,19 +39,14 @@ namespace MWN.Controllers
             return View(note);
         }
 
-        // GET: Notes/Create
+        // GET: Notes2/Create
         public IActionResult Create()
         {
-
-            var note = new Note();
-            note.Created = DateTime.Now;
-            
-            _context.Add(note);
-            return View(note);
+            return View();
         }
 
-        // POST: Notes/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // POST: Notes2/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -60,7 +54,6 @@ namespace MWN.Controllers
         {
             if (ModelState.IsValid)
             {
-
                 _context.Add(note);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -68,7 +61,7 @@ namespace MWN.Controllers
             return View(note);
         }
 
-        // GET: Notes/Edit/5
+        // GET: Notes2/Edit/5
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
@@ -84,8 +77,8 @@ namespace MWN.Controllers
             return View(note);
         }
 
-        // POST: Notes/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // POST: Notes2/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -119,7 +112,7 @@ namespace MWN.Controllers
             return View(note);
         }
 
-        // GET: Notes/Delete/5
+        // GET: Notes2/Delete/5
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
@@ -137,7 +130,7 @@ namespace MWN.Controllers
             return View(note);
         }
 
-        // POST: Notes/Delete/5
+        // POST: Notes2/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
