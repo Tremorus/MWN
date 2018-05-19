@@ -18,5 +18,10 @@ namespace MWN.Models
         public DateTime Created { get; set; }
         [DataType(DataType.DateTime)]
         public DateTime Changed { get; set; }
+        public Note()
+        {
+            Created= Changed = DateTime.Now;
+            
+        }
     }
 }

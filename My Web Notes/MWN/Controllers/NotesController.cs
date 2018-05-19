@@ -45,7 +45,8 @@ namespace MWN.Controllers
         {
 
             var note = new Note();
-            note.Created = DateTime.Now;
+            //note.Created = note.Changed = DateTime.Now;
+            //note.Changed = DateTime.Now;
             
             _context.Add(note);
             return View(note);
