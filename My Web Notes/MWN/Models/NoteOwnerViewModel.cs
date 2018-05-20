@@ -8,6 +8,6 @@ namespace MWN.Models
     {
         public List<Note> notes;
         public SelectList owners;
-        public string noteOwner { get; set; }
+        public string ownerField { get; set; }
     }
 }

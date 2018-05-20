@@ -20,9 +20,9 @@ namespace MWN.Controllers
 
         // GET: Notes
 
-        public async Task<IActionResult> Index(string ownerField, string searchString)
+        public async Task<IActionResult> Index(string ownerField, string searchString) //search by owner: ownerField , content filter: searchString
         {
-            // create LINQ query for owners extraction
+            // create LINQ query for furhter owners extraction
             IQueryable<string> ownerQuery = from m in _context.Note
                                             orderby m.Owner
                                             select m.Owner;
@@ -40,7 +40,6 @@ namespace MWN.Controllers
             if(!String.IsNullOrEmpty(ownerField))
             {
                 notes = notes.Where(x => x.Owner == ownerField);
-
             }
 
             var noteOwnerVM = new NoteOwnerViewModel();
