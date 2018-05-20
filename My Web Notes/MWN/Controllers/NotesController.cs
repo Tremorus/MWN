@@ -2,8 +2,10 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MWN.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace MWN.Controllers
 {
@@ -17,15 +19,35 @@ namespace MWN.Controllers
         }
 
         // GET: Notes
-        public async Task<IActionResult> Index(string searchString)
+
+        public async Task<IActionResult> Index(string ownerField, string searchString)
         {
-            var notes = from m in _context.Note select m; //LINQ query
+            // create LINQ query for owners extraction
+            IQueryable<string> ownerQuery = from m in _context.Note
+                                            orderby m.Owner
+                                            select m.Owner;
+
+            var notes = from m in _context.Note
+                        select m; //LINQ query
+
+
 
             if (!String.IsNullOrEmpty(searchString))
             {
                 notes = notes.Where(s => s.Content.Contains(searchString));
             }
-            return View(await notes.ToListAsync());
+
+            if(!String.IsNullOrEmpty(ownerField))
+            {
+                notes = notes.Where(x => x.Owner == ownerField);
+
+            }
+
+            var noteOwnerVM = new NoteOwnerViewModel();
+            noteOwnerVM.owners = new SelectList(await ownerQuery.Distinct().ToListAsync()); //select unique values from owners
+            noteOwnerVM.notes = await notes.ToListAsync();
+
+            return View(noteOwnerVM);
         }
 
         // GET: Notes/Details/5

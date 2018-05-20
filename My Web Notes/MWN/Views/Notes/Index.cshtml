@@ -1,4 +1,6 @@
-﻿@model IEnumerable<MWN.Models.Note>
+﻿@*@model IEnumerable<MWN.Models.Note>*@
+@model MWN.Models.NoteOwnerViewModel
+
 
 @{
     ViewData["Title"] = "Index";
@@ -12,33 +14,42 @@
 
 <form asp-controller="Notes" asp-action="Index" method="get">
     <p>
-        Search in content: <input type="search" name="searchString" />
+        <select asp-for="noteOwner" asp-items="Model.owners">
+            <option value="">All</option>
+        </select>
+        
+        Content filter: <input type="search" name="searchString" />
         <input type="submit" value="Filter" />
+
+        @*Search in content: <input type="search" name="searchString" />
+        <input type="submit" value="Filter" />*@
     </p>
+
+
 </form>
 <table class="table">
     <thead>
         <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Owner)
+                    @Html.DisplayNameFor(model => model.notes[0].Owner)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Title)
+                    @Html.DisplayNameFor(model => model.notes[0].Title)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Content)
+                    @Html.DisplayNameFor(model => model.notes[0].Content)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Created)
+                    @Html.DisplayNameFor(model => model.notes[0].Created)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Changed)
+                    @Html.DisplayNameFor(model => model.notes[0].Changed)
                 </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.notes) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Owner)
