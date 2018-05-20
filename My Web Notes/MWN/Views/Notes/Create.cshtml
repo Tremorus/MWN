@@ -1,12 +1,12 @@
 ﻿@model MWN.Models.Note
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create new note";
 }
 
-<h2>Create</h2>
+<h2>@ViewBag.Title</h2>
 
-<h4>Note</h4>
+@*<h4>Note</h4>*@
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -29,24 +29,24 @@
             </div>
             <div class="form-group">
                 <label asp-for="Created" class="control-label"></label>
-                <input asp-for="Created" class="form-control" disabled />
+                <input asp-for="Created" class="form-control" hidden />
                 <span asp-validation-for="Created" class="text-danger"></span>
             </div>
             <div class="form-group" hidden>
                 <label asp-for="Changed" class="control-label"></label>
-                <input asp-for="Changed" class="form-control" disabled />
+                <input asp-for="Changed" class="form-control"  />
                 <span asp-validation-for="Changed" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default btn-primary" />
+            
+                <a asp-action="Index" class="btn btn-info">Back to List</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

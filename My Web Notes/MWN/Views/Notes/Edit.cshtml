@@ -30,24 +30,23 @@
             </div>
             <div class="form-group">
                 <label asp-for="Created" class="control-label"></label>
-                <input asp-for="Created" class="form-control" />
+                <input asp-for="Created" class="form-control" hidden />
                 <span asp-validation-for="Created" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Changed" class="control-label"></label>
-                <input asp-for="Changed" class="form-control" />
+                <input asp-for="Changed" class="form-control" hidden />
                 <span asp-validation-for="Changed" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-default btn-primary" />
+                <a asp-action="Index" class="btn btn-info">Back to List</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index" class="btn btn-info">Back to List</a>
-</div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

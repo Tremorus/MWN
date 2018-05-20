@@ -67,14 +67,15 @@ namespace MWN.Controllers
             return View(note);
         }
 
-        // GET: Notes/Create
+        // GET: Notes/Create view
+
         public IActionResult Create()
         {
 
             var note = new Note();
-            //note.Created = note.Changed = DateTime.Now;
+            note.Created = note.Changed = DateTime.Now;
             //note.Changed = DateTime.Now;
-            
+
             _context.Add(note);
             return View(note);
         }
@@ -88,6 +89,7 @@ namespace MWN.Controllers
         {
             if (ModelState.IsValid)
             {
+                //note.Changed = note.Created= DateTime.Now;
 
                 _context.Add(note);
                 await _context.SaveChangesAsync();
@@ -105,6 +107,8 @@ namespace MWN.Controllers
             }
 
             var note = await _context.Note.SingleOrDefaultAsync(m => m.Id == id);
+            //note.Changed = DateTime.Now;
+
             if (note == null)
             {
                 return NotFound();
@@ -117,7 +121,7 @@ namespace MWN.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,Owner,Title,Content,Created,Changed")] Note note)
+        public async Task<IActionResult> Edit(string id, [Bind("Id,Owner,Title,Content,Changed,Created")] Note note)
         {
             if (id != note.Id)
             {
@@ -128,6 +132,7 @@ namespace MWN.Controllers
             {
                 try
                 {
+                    note.Changed = DateTime.Now;
                     _context.Update(note);
                     await _context.SaveChangesAsync();
                 }
